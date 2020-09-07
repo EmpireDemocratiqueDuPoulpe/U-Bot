@@ -1,0 +1,11 @@
+{
+  "client_id": "",
+  "token": "",
+
+  "prefix": "_",
+
+  "owner_id": "",
+  "admin_groups": ["Administrateur", "Modérateur", "Modératrice"],
+
+  "inviteURL" : "https://discord.com/invite/XXXXXXX"
+}
