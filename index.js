@@ -5,6 +5,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const AntiSpam = require('discord-anti-spam');
+const db = require('./db.js');
 const configFile = './config.json';
 let config = require(configFile);
 
@@ -42,6 +43,12 @@ for (const file of commandFiles) {
 }
 
 client.commands = client.commands.sort((commandA, commandB) => commandA.id - commandB.id);
+
+/****************************
+ * OPEN DATABASE CONNECTION
+ ****************************/
+
+db.connect();
 
 /****************************
  * ONCE STARTED
