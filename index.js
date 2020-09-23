@@ -5,7 +5,8 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const AntiSpam = require('discord-anti-spam');
-const { client_id, token, prefix, admin_groups } = require('./config.json');
+const configFile = './config.json';
+let config = require(configFile);
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -47,7 +48,7 @@ client.commands = client.commands.sort((commandA, commandB) => commandA.id - com
  ****************************/
 
 client.once('ready', () => {
-    console.log(`Bot started!\nUse "https://discord.com/oauth2/authorize?client_id=${client_id}&scope=bot&permissions=8" to invite.`);
+    console.log(`Bot started!\nUse "https://discord.com/oauth2/authorize?client_id=${config.client_id}&scope=bot&permissions=8" to invite.`);
 });
 
 /****************************
@@ -58,9 +59,9 @@ client.on('message', message => {
     antiSpam.message(message);
 
     // Reject messages without prefix or sent by a bot.
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).split(' ');
+    const args = message.content.slice(config.prefix.length).split(' ');
     const commandName = args.shift().toLowerCase();
 
     // Get the command module
@@ -122,16 +123,35 @@ client.on('message', message => {
     }
     catch (e) {
         console.error(`Cannot execute "${command.name}" command: ${e}`);
-        message.reply('Uh oh! La commande n\'a pas pu se terminer correctement.');
+        message.reply('Uh oh! La commande n\'a pas pu se terminer correctement.').then().catch();
     }
 });
 
 function hasAdminRole(userRole) {
-    return admin_groups.find(role => role === userRole.name);
+    return config.admin_groups.find(role => role.name === userRole.name);
 }
+
+/****************************
+ * CHECK FOR CONFIG FILE CHANGE
+ ****************************/
+
+let fsWait = false;
+
+fs.watch(configFile, (event, fileName) => {
+    if (fileName) {
+        if (fsWait) return;
+
+        fsWait = setTimeout(() => {
+            fsWait = true;
+        }, 100);
+
+        console.log(`File "${fileName}" changed. Reloading file...`);
+        config = require(configFile);
+    }
+})
 
 /****************************
  * LOGIN
  ****************************/
 
-client.login(token);
+client.login(config.token);
