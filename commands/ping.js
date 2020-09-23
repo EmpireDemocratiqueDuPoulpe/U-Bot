@@ -7,6 +7,7 @@ module.exports = {
     adminOnly: false,
     cooldown: 3,
     aliases: [ 'pong' ],
+    isSetting: false,
     async execute(message, args) {
         const ping = await message.channel.send("Ping...");
         const ms = (ping.createdAt - message.createdAt);
@@ -18,7 +19,7 @@ module.exports = {
             )
             .then()
             .catch(e => {
-                console.error(`${name} command error: ${e}`)
+                console.error(`${module.exports.name} command error: ${e}`)
             }
         );
     },

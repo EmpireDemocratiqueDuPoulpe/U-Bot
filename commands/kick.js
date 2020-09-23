@@ -1,5 +1,3 @@
-const { inviteURL } = require('../config.json');
-
 module.exports = {
     name: 'kick',
     id: 100,
@@ -8,7 +6,10 @@ module.exports = {
     guildOnly: true,
     adminOnly: true,
     usage: '@nomUtilisateur (raison)',
+    isSetting: false,
     async execute(message, args) {
+        const { inviteURL } = require('../config.json');
+
         const user = message.mentions.members.first();
         const reason = args.slice(1).join(" ");
 

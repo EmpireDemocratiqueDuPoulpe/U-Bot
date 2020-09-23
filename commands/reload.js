@@ -7,7 +7,8 @@ module.exports = {
     adminOnly: true,
     cooldown: 3,
     aliases: [ 'r' ],
-    usage: '(nomCommande)',
+    usage: '[nomCommande]',
+    isSetting: false,
     execute(message, args) {
 
         // Get the command
