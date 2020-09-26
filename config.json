@@ -1,11 +1,30 @@
 {
   "client_id": "",
-  "token": "",
-
-  "prefix": "_",
-
   "owner_id": "",
-  "admin_groups": ["Administrateur", "Modérateur", "Modératrice"],
-
-  "inviteURL" : "https://discord.com/invite/XXXXXXX"
+  "token": "",
+  "database": {
+    "name": "",
+    "charset": "utf8",
+    "host": "localhost",
+    "port": "3306",
+    "user": "",
+    "password": ""
+  },
+  "prefix": "_",
+  "admin_groups": [
+    {
+      "name": "Administrateur",
+      "added_by": "Empire Démocratique du Poulpe#5551"
+    },
+    {
+      "name": "Modérateur",
+      "added_by": "Empire Démocratique du Poulpe#5551"
+    },
+    {
+      "name": "Modératrice",
+      "added_by": "Empire Démocratique du Poulpe#5551"
+    }
+  ],
+  "report_channel": "",
+  "inviteURL": "https://discord.com/invite/XXXXXXX"
 }
