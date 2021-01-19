@@ -13,7 +13,7 @@ module.exports = {
     execute: function (message, args) {
         const { prefix } = require('../config.json');
 
-        const {commands} = message.client;
+        const { commands } = message.client;
         const attachment = new Discord.MessageAttachment('assets/pics/look.png', 'look.png');
         const answerEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
@@ -65,6 +65,6 @@ module.exports = {
 
         if (command.adminOnly !== undefined) answerEmbed.addField('Admin:', `${command.adminOnly ? "oui" : "non"}`, true);
 
-        message.channel.send(answerEmbed);
+        message.channel.send(answerEmbed).catch(err => console.error(err));
     },
 };

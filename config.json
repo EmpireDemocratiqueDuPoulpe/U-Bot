@@ -1,14 +1,14 @@
 {
-  "client_id": "",
-  "owner_id": "",
-  "token": "",
+  "client_id": "746819345815961661",
+  "owner_id": "187971492959617024",
+  "token": "NzQ2ODE5MzQ1ODE1OTYxNjYx.X0F3tw.GV98oaQLuSlwqxRlmBdNJBsk6HI",
   "database": {
-    "name": "",
+    "name": "ubot_db",
     "charset": "utf8",
     "host": "localhost",
     "port": "3306",
-    "user": "",
-    "password": ""
+    "user": "ubot",
+    "password": "Agent 2 La Paix"
   },
   "prefix": "_",
   "admin_groups": [
@@ -25,6 +25,6 @@
       "added_by": "Empire Démocratique du Poulpe#5551"
     }
   ],
-  "report_channel": "",
-  "inviteURL": "https://discord.com/invite/XXXXXXX"
+  "report_channel": "758375148528861265",
+  "inviteURL": "https://discord.com/invite/UK5BrZC"
 }

@@ -27,7 +27,7 @@ module.exports = {
 
         // Check the reported member
         if (reported_member.user.tag === message.author.tag) {
-            return message.channel.send(`Uh oh! Tu ne peux pas te signaler toi-même, ${message.author}. Va te repentir si tu pense avoir blesser ton prochain !`)
+            return message.channel.send(`Uh oh! Tu ne peux pas te signaler toi-même, ${message.author}. Va te repentir si tu pense avoir blessé ton prochain !`)
         } else if (reported_member.user.tag === message.client.user.tag) {
             return message.channel.send(`Uh oh! Alors comme ça tu veux **ME** signaler, ${message.author} ?! J'vais le dire à mon créateur !`)
         }

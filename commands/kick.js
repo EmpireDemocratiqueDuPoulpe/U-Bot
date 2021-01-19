@@ -36,7 +36,7 @@ module.exports = {
                 message.channel.send(`L'utilisateur ${user.displayName} s'est fait expluser${reason ? ` pour "${reason}"` : ""}.`);
             }).catch(e => {
                 console.error(`Cannot kick user "${user.displayName}": ${e}`);
-                message.reply(`uh oh! Je ne peux pas expluser **${user.displayName}**.`);
+                message.reply(`uh oh! Je ne peux pas expulser **${user.displayName}**.`);
             });
     }
 };

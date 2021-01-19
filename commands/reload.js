@@ -10,7 +10,6 @@ module.exports = {
     usage: '[nomCommande]',
     isSetting: false,
     execute(message, args) {
-
         // Get the command
         const commandName = args[0].toLowerCase();
         const command = message.client.commands.get(commandName)

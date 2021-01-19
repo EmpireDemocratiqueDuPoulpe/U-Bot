@@ -1,7 +1,4 @@
-const fs = require('fs');
 const Discord = require('discord.js');
-const fileName = 'config.json';
-const configFile = require('../' + fileName);
 
 module.exports = {
     name: 'getadmingroups',

@@ -1,6 +1,5 @@
 const fs = require('fs');
-const fileName = 'config.json';
-const configFile = require('../' + fileName);
+const configFile = 'config.json';
 
 module.exports = {
     name: 'setadmingroups',
@@ -13,20 +12,21 @@ module.exports = {
     usage: '[add/del] [nom du groupe]',
     isSetting: true,
     async execute(message, args) {
+        const config = require(`../${configFile}`);
         const action = args[0];
         const groupName = args[1];
 
         // Check args
         if (!action ||!groupName) {
-            return message.channel.send(`Uh oh! Il semblerait que tu ai oublié les arguments, ${message.author}. Essaye comme ça :\n\`${configFile.prefix}${module.exports.name} ${module.exports.usage}\``);
+            return message.channel.send(`Uh oh! Il semblerait que tu ai oublié les arguments, ${message.author}. Essaye comme ça :\n\`${config.prefix}${module.exports.name} ${module.exports.usage}\``);
         }
 
         if ((action !== "add" && action !== "del")) {
-            return message.channel.send(`Uh oh! Il semblerait que tu ai mal renseigné l'action, ${message.author}. Essaye comme ça :\n\`${configFile.prefix}${module.exports.name} ${module.exports.usage}\``);
+            return message.channel.send(`Uh oh! Il semblerait que tu ai mal renseigné l'action, ${message.author}. Essaye comme ça :\n\`${config.prefix}${module.exports.name} ${module.exports.usage}\``);
         }
 
         // Get groups
-        let groups = configFile.admin_groups;
+        let groups = config.admin_groups;
 
         // Add group
         if (action === "add") {
@@ -39,13 +39,13 @@ module.exports = {
 
         const statusMsg = await message.channel.send("Mise à jour des groupes administrateurs...");
 
-        await fs.writeFile(fileName, JSON.stringify(configFile, null, 2), (err) => {
+        await fs.writeFile(configFile, JSON.stringify(config, null, 2), (err) => {
             if (err) {
                 statusMsg.edit("Uh oh, je n'arrive pas à mettre à jour les groupes administrateurs. C'est que je suis mal fait dis donc !");
                 return console.error(err);
             }
 
-            statusMsg.edit(`Groupes administrateurs mis à jour !`);
+            statusMsg.edit(`Groupes administrateurs mis à jour ! Les modifications devrait prendre effet d'ici dix secondes.`);
             console.log('Updated admin groups.');
         });
     },

@@ -2,33 +2,16 @@
  * IMPORT
  ****************************/
 
-const fs = require('fs');
-const Discord = require('discord.js');
-const AntiSpam = require('discord-anti-spam');
-const db = require('./db.js');
+const fs = require('fs')
+const Discord = require('discord.js')
+const db = require('./db.js')
+
 const configFile = './config.json';
 let config = require(configFile);
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const cooldown = new Discord.Collection();
-const antiSpam = new AntiSpam({
-    warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
-    kickThreshold: 7, // Amount of messages sent in a row that will cause a kick.
-    banThreshold: 7, // Amount of messages sent in a row that will cause a ban.
-    maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
-    warnMessage: '{@user}, le spam c\'est mal.', // Message that will be sent in chat upon warning a user.
-    kickMessage: '**{user_tag}** a été expulsé pour spam.', // Message that will be sent in chat upon kicking a user.
-    banMessage: '**{user_tag}** a été banni pour spam. Comment ose-t-il un acte d\'une cruauté telle ?', // Message that will be sent in chat upon banning a user.
-    maxDuplicatesWarning: 7, // Amount of duplicate messages that trigger a warning.
-    maxDuplicatesKick: 10, // Amount of duplicate messages that trigger a kick.
-    maxDuplicatesBan: 12, // Amount of duplicate messages that trigger a ban.
-    exemptPermissions: [ 'ADMINISTRATOR' ], // Bypass users with any of these permissions.
-    ignoreBots: true, // Ignore bot messages.
-    verbose: true, // Extended Logs from module.
-    ignoredUsers: [], // Array of User IDs that get ignored.
-    ignoredRoles: ['720968009467953163', '720968036433133578', '724023583562530876', '724008727346413598'], // Array of string role IDs or role name that are ignored.
-});
 
 /****************************
  * IMPORT COMMANDS
@@ -63,12 +46,10 @@ client.once('ready', () => {
  ****************************/
 
 client.on('message', message => {
-    antiSpam.message(message);
-
     // Reject messages without prefix or sent by a bot.
     if (!message.content.startsWith(config.prefix) || message.author.bot) return;
 
-    const args = message.content.slice(config.prefix.length).split(' ');
+    const args = message.content.slice(config.prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     // Get the command module
@@ -79,11 +60,10 @@ client.on('message', message => {
 
     // Check args
     if (command.args && !args.length) {
-
         let msg = `Il manque des arguments à la commande, ${message.author} !`;
 
         if (command.usage) {
-            msg += `\nVous devriez essayer comme ça: \`${prefix}${commandName} ${command.usage}`;
+            msg += `\nVous devriez essayer comme ça: \`${config.prefix}${commandName} ${command.usage}`;
         }
 
         return message.channel.send(msg);
@@ -150,10 +130,10 @@ fs.watch(configFile, (event, fileName) => {
 
         fsWait = setTimeout(() => {
             fsWait = true;
-        }, 100);
+        }, 10000);
 
         console.log(`File "${fileName}" changed. Reloading file...`);
-        config = require(configFile);
+        config = require(configFile)
     }
 })
 
@@ -161,4 +141,4 @@ fs.watch(configFile, (event, fileName) => {
  * LOGIN
  ****************************/
 
-client.login(config.token);
+client.login(config.token).catch(err => console.error(err));
