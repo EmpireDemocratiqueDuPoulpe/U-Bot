@@ -1,7 +1,7 @@
 {
   "client_id": "746819345815961661",
   "owner_id": "187971492959617024",
-  "token": "NzQ2ODE5MzQ1ODE1OTYxNjYx.X0F3tw.GV98oaQLuSlwqxRlmBdNJBsk6HI",
+  "token": "YOUR_TOKEN_HERE",
   "database": {
     "name": "ubot_db",
     "charset": "utf8",
