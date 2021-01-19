@@ -2,12 +2,12 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'report',
-    id: 3,
+    id: 50,
     description: 'Signaler un utilisateur.',
     args: true,
     guildOnly: true,
     adminOnly: false,
-    usage: '@nomUtilisateur [raison]',
+    usage: '[@nomUtilisateur] [raison]',
     isSetting: false,
     execute(message, args) {
         const { report_channel } = require('../config.json');

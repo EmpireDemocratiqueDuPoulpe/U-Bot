@@ -7,7 +7,7 @@ module.exports = {
     args: true,
     guildOnly: true,
     adminOnly: true,
-    usage: '@nomUtilisateur (raison)',
+    usage: '[@nomUtilisateur] (raison)',
     isSetting: false,
     async execute(message, args) {
         const member = message.mentions.members.first();
